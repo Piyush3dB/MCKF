@@ -25,13 +25,14 @@ bV = zeros(1,N);  %iteration number
 for k=1:N
 
     s = F*s+[q1(k,1);q2(k,1)]; %true state update process
-    sV(:,k) = s;               %save true state value
     
     z = H*s+r(k,1);            %true measurement update process
-    zV(:,k) = z;               %save true measurement value
 
     [x,P,b] = MCKF(F,x,P,H,z,Q,R); % KF
 
+
+    sV(:,k) = s;               %save true state value
+    zV(:,k) = z;               %save true measurement value
     xV(:,k) = x;               %save estimated state value
     bV(:,k) = b;               %save iteration number
 end
